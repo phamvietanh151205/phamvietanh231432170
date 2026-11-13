@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "author": "Runner Health Monitor ThingsBoard",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "board-bmp180",
+      "id": "bmp",
+      "top": -61.76,
+      "left": -162.94,
+      "attrs": { "temperature": "28" }
+    },
+    { "type": "wokwi-led", "id": "led", "top": 15.6, "left": 311, "attrs": { "color": "red" } },
+    { "type": "wokwi-buzzer", "id": "buzz", "top": 165.6, "left": 280.2, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 119.15,
+      "left": 201.6,
+      "attrs": { "value": "220000" }
+    }
+  ],
+  "connections": [
+    [ "esp:3V3", "bmp:VCC", "red", [ "h-81.41", "v163.2" ] ],
+    [ "esp:GND.1", "bmp:GND", "black", [ "h-71.81", "v47.81" ] ],
+    [ "esp:21", "bmp:SDA", "green", [ "h52.84", "v-105.6", "h-211.2", "v-0.19" ] ],
+    [ "esp:22", "bmp:SCL", "blue", [ "h62.44", "v-86.4", "h-211.2", "v-0.19" ] ],
+    [ "buzz:2", "esp:GND.2", "black", [ "v9.6", "h-202", "v-230.4" ] ],
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "buzz:1", "esp:26", "green", [ "h-336", "v-134.4" ] ],
+    [ "led:A", "r1:2", "green", [ "v0" ] ],
+    [ "r1:1", "esp:25", "green", [ "v0" ] ],
+    [ "esp:GND.2", "led:C", "black", [ "v0" ] ]
+  ],
+  "serialMonitor": { "collapse": false, "display": "always" },
+  "dependencies": {}
+}
